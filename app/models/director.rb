@@ -1,0 +1,3 @@
+class Director < ApplicationRecord
+
+end
