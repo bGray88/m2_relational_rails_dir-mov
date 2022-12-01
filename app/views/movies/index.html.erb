@@ -1,0 +1,9 @@
+<h1>Movies</h1>
+
+<% @movies.each do |movie| %>
+  <p>Name: <%= movie.name %></p>
+  <p>Version: <%= movie.version %></p>
+  <p>Rating: <%= movie.rating %></p>
+  <p>Censored: <%= movie.censored %></p>
+  <p>Length: <%= movie.length_in_mins %> minutes</p>
+<% end %>
