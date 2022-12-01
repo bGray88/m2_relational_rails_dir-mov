@@ -4,5 +4,5 @@
 <h1>Directors</h1>
 
 <% @directors.each do |director| %>
-  <p><%= director.name %> <%= director.created_at %></p>
+  <p><h2><%= director.name %></h2><h3>Created at: <%= director.created_at %></h3></p>
 <% end %>

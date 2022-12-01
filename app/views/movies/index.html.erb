@@ -4,9 +4,9 @@
 <h1>Movies</h1>
 
 <% @movies.each do |movie| %>
-  <h1>Name:     <%= movie.name %></h1>
-  <h1>Version:  <%= movie.version %></h1>
-  <h1>Rating:   <%= movie.rating %></h1>
-  <h1>Censored: <%= movie.censored %></h1>
-  <h1>Length:   <%= movie.length_in_mins %> minutes</h1>
+  <h2>Name:     </h2><h3><%= movie.name %></h3>
+  <h2>Version:  </h2><h3><%= movie.version %></h3>
+  <h2>Rating:   </h2><h3><%= movie.rating %></h3>
+  <h2>Censored: </h2><h3><%= movie.censored %></h3>
+  <h2>Length:   </h2><h3><%= movie.length_in_mins %> minutes</h3>
 <% end %>
