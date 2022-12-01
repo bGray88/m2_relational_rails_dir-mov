@@ -1,6 +1,3 @@
-<a href="/movies">Movies List</a>
-<a href="/directors">Directors List</a>
-
 <% @movies.each do |movie| %>
   <%= link_to movie.name, "/movies/#{movie.id}" %>
 <% end %>

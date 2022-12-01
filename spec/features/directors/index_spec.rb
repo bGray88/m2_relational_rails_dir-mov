@@ -48,23 +48,7 @@ RSpec.describe 'Directors index' do
         expect(page).to have_content(@director_corman.created_at)
       end
     end
-
-    describe 'When I visit any page on the site' do
-      it 'shows a link at the top of the page for both of the director & movie indexes' do
-        visit "/directors/#{@director_guillermo.id}"
-
-        click_on 'Movies List'
-
-        expect(current_path).to eq("/movies")
-
-        visit "/directors/#{@director_guillermo.id}"
-
-        click_on 'Directors List'
-
-        expect(current_path).to eq("/directors")
-      end
-    end
-
+    
     describe 'When I visit a parent show page (/parents/:id)' do
      it 'shows a link to take me to that parent\'s `child_table_name` page' do
         visit "/directors/#{@director_guillermo.id}"

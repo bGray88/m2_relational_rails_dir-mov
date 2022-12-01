@@ -63,21 +63,5 @@ RSpec.describe 'Movies index' do
         expect(page).not_to have_content(@corman_movie_1.name)
       end
     end
-
-    describe 'When I visit any page on the site' do
-      it 'shows a link at the top of the page for both of the director & movie indexes' do
-        visit "/directors/#{@director_guillermo.id}/movies"
-
-        click_on 'Movies List'
-
-        expect(current_path).to eq("/movies")
-
-        visit "/directors/#{@director_guillermo.id}/movies"
-
-        click_on 'Directors List'
-
-        expect(current_path).to eq("/directors")
-      end
-    end
   end
 end

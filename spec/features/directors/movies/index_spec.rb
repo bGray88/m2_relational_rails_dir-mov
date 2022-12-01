@@ -52,7 +52,7 @@ RSpec.describe 'Director\'s movies index' do
 
       expect(current_path).to eq("/movies")
 
-      visit "/directors/#{@director_guillermo.id}/movies"
+      visit "/movies"
 
       click_on 'Directors List'
 
