@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Directors index' do
+RSpec.describe 'Movies index' do
   before :each do
     @movie_1 = Movie.create!(version: 'US Release',
                               rating: 'R',
@@ -12,7 +12,7 @@ RSpec.describe 'Directors index' do
                               censored: true,
                               length_in_mins: 92,
                               name: 'Cronos')
-    @movie_2 = Movie.create!(version: 'Original Release',
+    @movie_3 = Movie.create!(version: 'Original Release',
                               rating: 'R',
                               censored: false,
                               length_in_mins: 106,
@@ -30,6 +30,7 @@ RSpec.describe 'Directors index' do
         expect(page).to have_content(@movie_1.censored)
         expect(page).to have_content(@movie_1.length_in_mins)
         expect(page).to have_content(@movie_2.name)
+        expect(page).to have_content(@movie_3.name)
       end
     end
 
@@ -43,6 +44,7 @@ RSpec.describe 'Directors index' do
         expect(page).to have_content(@movie_1.censored)
         expect(page).to have_content(@movie_1.length_in_mins)
         expect(page).not_to have_content(@movie_2.name)
+        expect(page).not_to have_content(@movie_3.name)
       end
     end
   end
