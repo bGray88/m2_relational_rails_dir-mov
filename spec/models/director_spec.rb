@@ -36,7 +36,7 @@ RSpec.describe Director, type: :model do
                                                           name: 'Little Shop of Horrors')
       end
 
-      it 'returns the movie count for director' do
+      it 'count of the number of movies associated with this director' do
         expect(@director_guillermo.movie_count).to eq(3)
       end
     end
