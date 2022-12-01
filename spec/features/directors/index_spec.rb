@@ -27,6 +27,9 @@ RSpec.describe 'Directors index' do
         visit "/directors/#{@director_1.id}"
 
         expect(page).to have_content(@director_1.name)
+        expect(page).to have_content(@director_1.age)
+        expect(page).to have_content(@director_1.hometown)
+        expect(page).to have_content(@director_1.alive)
         expect(page).not_to have_content(@director_2.name)
       end
     end
