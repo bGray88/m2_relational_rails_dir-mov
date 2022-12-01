@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'Directors index' do
   before :each do
-    @director_1 = Director.create!(hometown: 'Guadalajara, Mexico',
-                                  alive: true,
-                                  age: 58,
-                                  name: 'Guillermo del Toro')
-    @director_2 = Director.create!(hometown: 'Detroit, Michigan',
-                                  alive: true,
-                                  age: 96,
-                                  name: 'Roger Corman')
+    @director_guillermo = Director.create!(hometown: 'Guadalajara, Mexico',
+                                            alive: true,
+                                            age: 58,
+                                            name: 'Guillermo del Toro')
+    @director_corman = Director.create!(hometown: 'Detroit, Michigan',
+                                        alive: true,
+                                        age: 96,
+                                        name: 'Roger Corman')
   end
 
   describe 'As a visitor' do
@@ -17,20 +17,20 @@ RSpec.describe 'Directors index' do
       it 'shows the name of each director record in the system' do
         visit '/directors'
 
-        expect(page).to have_content(@director_1.name)
-        expect(page).to have_content(@director_2.name)
+        expect(page).to have_content(@director_guillermo.name)
+        expect(page).to have_content(@director_corman.name)
       end
     end
 
     describe 'When I visit \'/parents/:id' do
       it 'shows the director with that id including the director\'s attributes' do
-        visit "/directors/#{@director_1.id}"
+        visit "/directors/#{@director_guillermo.id}"
 
-        expect(page).to have_content(@director_1.name)
-        expect(page).to have_content(@director_1.age)
-        expect(page).to have_content(@director_1.hometown)
-        expect(page).to have_content(@director_1.alive)
-        expect(page).not_to have_content(@director_2.name)
+        expect(page).to have_content(@director_guillermo.name)
+        expect(page).to have_content(@director_guillermo.age)
+        expect(page).to have_content(@director_guillermo.hometown)
+        expect(page).to have_content(@director_guillermo.alive)
+        expect(page).not_to have_content(@director_corman.name)
       end
     end
   end
