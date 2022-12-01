@@ -45,7 +45,7 @@ RSpec.describe 'Director\'s movies index' do
   end
 
   describe 'When I visit any page on the site' do
-    it 'shows a link at the top of the page that takes me to the Child Index' do
+    it 'shows a link at the top of the page for both of the director & movie indexes' do
       visit "/directors/#{@director_guillermo.id}/movies"
 
       click_on 'Movies List'
