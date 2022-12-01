@@ -22,7 +22,7 @@ RSpec.describe 'Directors index' do
       end
     end
 
-    describe 'When I visit \'/parents/:id' do
+    describe 'When I visit \'/directors/:id' do
       it 'shows the director with that id including the director\'s attributes' do
         visit "/directors/#{@director_guillermo.id}"
 
@@ -31,6 +31,21 @@ RSpec.describe 'Directors index' do
         expect(page).to have_content(@director_guillermo.hometown)
         expect(page).to have_content(@director_guillermo.alive)
         expect(page).not_to have_content(@director_corman.name)
+      end
+    end
+
+    describe 'When I visit \'/directors' do
+      it 'shows records ordered by most recently created first
+      And next to each of the records I see when it was created' do
+        visit '/directors'
+
+        expected = @director_guillermo.created_at <= @director_corman.created_at
+
+        expect(page).to have_content(@director_guillermo.name)
+        expect(page).to have_content(@director_corman.name)
+        expect(expected).to be true
+        expect(page).to have_content(@director_guillermo.created_at)
+        expect(page).to have_content(@director_corman.created_at)
       end
     end
   end
