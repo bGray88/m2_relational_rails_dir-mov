@@ -1,24 +1,13 @@
-# README
+# Relational Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Brandon Gray
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby 2.7.4
 
-* System dependencies
+* Rails 5.2.8.1
 
-* Configuration
+* DB Schema:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![Alt text](public/project1_relational_rails.png?raw=true "SCHEMA")
