@@ -69,7 +69,7 @@ RSpec.describe 'Directors index' do
      it 'shows a link to take me to that parent\'s `child_table_name` page' do
         visit "/directors/#{@director_guillermo.id}"
 
-        click_on 'Director\'s Movie List'
+        click_on "#{@director_guillermo.name} Movie List"
 
         expect(current_path).to eq("/directors/#{@director_guillermo.id}/movies")
       end
