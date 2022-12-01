@@ -48,5 +48,21 @@ RSpec.describe 'Directors index' do
         expect(page).to have_content(@director_corman.created_at)
       end
     end
+
+    describe 'When I visit any page on the site' do
+      it 'shows a link at the top of the page that takes me to the Child Index' do
+        visit "/directors/#{@director_guillermo.id}/movies"
+
+        click_on 'Movies List'
+
+        expect(current_path).to eq("/movies")
+
+        visit "/directors/#{@director_guillermo.id}/movies"
+
+        click_on 'Directors List'
+
+        expect(current_path).to eq("/directors")
+      end
+    end
   end
 end

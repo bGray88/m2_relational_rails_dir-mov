@@ -31,11 +31,32 @@ RSpec.describe 'Director\'s movies index' do
                                                       length_in_mins: 72,
                                                       name: 'Little Shop of Horrors')
   end
-  it 'links to each movies show page' do
-    visit "/directors/#{@director_guillermo.id}/movies"
 
-    click_on @guillermo_movie_3.name
+  describe '' do
+    describe '' do
+      it 'links to each movies show page' do
+        visit "/directors/#{@director_guillermo.id}/movies"
 
-    expect(current_path).to eq("/movies/#{@guillermo_movie_3.id}")
+        click_on @guillermo_movie_3.name
+
+        expect(current_path).to eq("/movies/#{@guillermo_movie_3.id}")
+      end
+    end
+  end
+
+  describe 'When I visit any page on the site' do
+    it 'shows a link at the top of the page that takes me to the Child Index' do
+      visit "/directors/#{@director_guillermo.id}/movies"
+
+      click_on 'Movies List'
+
+      expect(current_path).to eq("/movies")
+
+      visit "/directors/#{@director_guillermo.id}/movies"
+
+      click_on 'Directors List'
+
+      expect(current_path).to eq("/directors")
+    end
   end
 end
