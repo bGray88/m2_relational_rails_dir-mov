@@ -62,11 +62,11 @@ RSpec.describe 'Directors index' do
       end
     end
 
-    describe 'When I visit the Parent Index page' do
-      it 'has a New Director button routes to \'/parents/new\' where I  see a form for a new parent record' do
+    describe 'When I visit the Director Index page' do
+      it 'has a New Director button routes to \'/directors/new\' where I  see a form for a new director record' do
         visit "/directors"
 
-        click_on "New Parent"
+        click_on "New Director"
 
         expect(current_path).to eq("/directors/new")
       end
