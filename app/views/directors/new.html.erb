@@ -1,9 +1,12 @@
 <form action="/directors" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <p>Enter a new director:</p>
-  <input type='text' name='director[name]'/><br/>
-  <input type='text' name='director[hometown]'/><br/>
-  <input type='text' name='director[alive]'/><br/>
-  <input type='text' name='director[age]'/><br/>
+  <label><h3>Name: <input type='text' name='director[name]'/></h3></label>
+  <label><h3>Hometown: <input type='text' name='director[hometown]'/></h3></label>
+  <label><h3>
+    Living: true<input type="radio" name="director[alive]" value=true checked="checked" />
+            false<input type="radio" name="director[alive]" value=false />
+  </h3></label>
+  <label><h3>Age: <input type='text' name='director[age]'/></h3></label>
   <input type='submit'/>
 </form>

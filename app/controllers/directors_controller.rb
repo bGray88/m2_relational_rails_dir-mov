@@ -11,11 +11,12 @@ class DirectorsController < ApplicationController
   end
 
   def create
+    binding.pry
     director = Director.new({
-      hometown: params[:hometown],
-      alive:    params[:alive],
-      age:      params[:age],
-      name:     params[:name]
+      hometown: params[:director][:hometown],
+      alive:    params[:director][:alive],
+      age:      params[:director][:age],
+      name:     params[:director][:name]
     })
     director.save
 

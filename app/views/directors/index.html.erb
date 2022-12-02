@@ -1,6 +1,6 @@
 <h1>Directors</h1>
 
-<h1><%= link_to "New Director", "/directors/new" %></h1>
+<h1><%= button_to "New Director", "/directors/new", :method => "get" %></h1>
 
 <% @directors.each do |director| %>
   <p><h2><%= director.name %></h2><h3>Created at: <%= director.created_at %></h3></p>
