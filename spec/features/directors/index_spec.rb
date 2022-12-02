@@ -35,9 +35,20 @@ RSpec.describe 'Directors index' do
 
         expect(page).to have_content(@director_guillermo.name)
         expect(page).to have_content(@director_corman.name)
-        expect(expected).to be true
         expect(page).to have_content(@director_guillermo.created_at)
         expect(page).to have_content(@director_corman.created_at)
+        expect(Director.all).to eq([@director_corman, @director_guillermo])
+        expect(expected).to be true
+
+        @director_corman.created_at = @director_corman.created_at + 10 * 600
+        @director_corman.save
+
+        visit '/directors'
+
+        expected = @director_corman.created_at > @director_guillermo.created_at
+
+        expect(Director.all).to eq([@director_guillermo, @director_corman])
+        expect(expected).to be true
       end
     end
     
