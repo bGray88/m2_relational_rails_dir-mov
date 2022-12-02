@@ -69,6 +69,14 @@ RSpec.describe 'Directors index' do
         click_on "New Director"
 
         expect(current_path).to eq("/directors/new")
+        visit "/directors/new"
+        director_count = Director.all
+
+        expect(page).to have_content("Name:")
+        click_on "create"
+
+        expect(current_path).to eq("/directors")
+        expect(Director.all).to eq(director_count)
       end
     end
   end
