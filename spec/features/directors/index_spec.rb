@@ -61,5 +61,15 @@ RSpec.describe 'Directors index' do
         expect(current_path).to eq("/directors/#{@director_guillermo.id}/movies")
       end
     end
+
+    describe 'When I visit the Parent Index page' do
+      it 'has a New Director button routes to \'/parents/new\' where I  see a form for a new parent record' do
+        visit "/directors"
+
+        click_on "New Parent"
+
+        expect(current_path).to eq("/directors/new")
+      end
+    end
   end
 end
