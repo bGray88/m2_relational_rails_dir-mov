@@ -37,17 +37,16 @@ RSpec.describe 'Movies index' do
   end
 
   describe 'As a visitor' do
-    describe 'When I visit \'/movies' do
-      it 'shows each movie in the system including the movie\'s attributes' do
-        visit '/movies'
+    describe 'When I visit \'/movies/:id' do
+      it 'shows the movie with that id including the movie\'s attributes' do
+        visit "/movies/#{@guillermo_movie_1.id}"
 
         expect(page).to have_content(@guillermo_movie_1.name)
         expect(page).to have_content(@guillermo_movie_1.version)
         expect(page).to have_content(@guillermo_movie_1.rating)
         expect(page).to have_content(@guillermo_movie_1.censored)
         expect(page).to have_content(@guillermo_movie_1.length_in_mins)
-        expect(page).to have_content(@guillermo_movie_2.name)
-        expect(page).to have_content(@corman_movie_1.name)
+        expect(page).not_to have_content(@corman_movie_1.name)
       end
     end
   end
