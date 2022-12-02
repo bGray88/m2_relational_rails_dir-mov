@@ -37,9 +37,13 @@ RSpec.describe 'Directors index' do
     describe 'When I visit \'/directors' do
       it 'shows records ordered by most recently created first
       And next to each of the records I see when it was created' do
+
+        @director_guillermo.created_at = @director_guillermo.created_at + 10 * 60
+        @director_guillermo.save
+
         visit '/directors'
 
-        expected = @director_guillermo.created_at <= @director_corman.created_at
+        expected = @director_corman.created_at < @director_guillermo.created_at
 
         expect(page).to have_content(@director_guillermo.name)
         expect(page).to have_content(@director_corman.name)
