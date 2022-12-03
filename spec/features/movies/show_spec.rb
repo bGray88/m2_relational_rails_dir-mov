@@ -49,5 +49,19 @@ RSpec.describe 'Movies index' do
         expect(page).not_to have_content(@corman_movie_1.name)
       end
     end
+
+    describe 'Then I see a link to update the movie "Update Movie"' do
+      it 'has a link "Update Movie" that goes to \'/movies/:id/edit\' has a form to edit the movies\'s attributes' do
+        
+        visit "/movies/#{@guillermo_movie_1.id}/edit"
+        new_length = 5000
+        
+        fill_in 'director[age]', :with => new_length
+        click_on "Submit Changes"
+
+        expect(current_path).to eq("/movies/#{@guillermo_movie_1.id}")
+        expect(Movie.find(@guillermo_movie_1.id).age).to eq(5000)
+      end
+    end
   end
 end

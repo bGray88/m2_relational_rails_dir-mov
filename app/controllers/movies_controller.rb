@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def create
     parent = Director.find_by(name: params[:movie][:director_id])
+    parent_id = parent.id unless parent.nil?
     
     movie = Movie.new({
       version:        params[:movie][:version],
@@ -19,7 +20,7 @@ class MoviesController < ApplicationController
       censored:       params[:movie][:censored],
       length_in_mins: params[:movie][:length_in_mins],
       name:           params[:movie][:name],
-      director_id:    parent.id
+      director_id:    parent_id
     })
     movie.save
 
