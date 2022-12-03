@@ -10,4 +10,4 @@ Things you may want to cover:
 
 * DB Schema:
 
-![Alt text](public/project1_relational_rails.png?raw=true "SCHEMA")
+![Alt text](app/assets/images/project1_relational_rails.png?raw=true "SCHEMA")
