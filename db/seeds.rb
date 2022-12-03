@@ -34,3 +34,5 @@
                                                   censored: false,
                                                   length_in_mins: 72,
                                                   name: 'Little Shop of Horrors')
+@director_guillermo.created_at = @director_guillermo.created_at + 10 * 600
+@director_guillermo.save

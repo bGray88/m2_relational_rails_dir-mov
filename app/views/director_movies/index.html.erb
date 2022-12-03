@@ -1,6 +1,5 @@
-<a href="/movies">Movies List</a>
-<a href="/directors">Directors List</a>
+<h1><%= @director.name %> Movies</h1>
 
-<% @movies.each do |movie| %>
-  <%= link_to movie.name, "/movies/#{movie.id}" %>
+<br><% @movies.each do |movie| %>
+  <h2><%= link_to "#{movie.name}: #{movie.version}", "/movies/#{movie.id}" %></h2><br>
 <% end %>

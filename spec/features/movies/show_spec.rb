@@ -37,37 +37,17 @@ RSpec.describe 'Movies index' do
   end
 
   describe 'As a visitor' do
-    describe 'When I visit \'/movies' do
-      it 'shows each movie in the system including the movie\'s attributes' do
-        visit '/movies'
+    describe 'When I visit \'/movies/:id' do
+      it 'shows the movie with that id including the movie\'s attributes' do
+        visit "/movies/#{@guillermo_movie_1.id}"
 
         expect(page).to have_content(@guillermo_movie_1.name)
         expect(page).to have_content(@guillermo_movie_1.version)
         expect(page).to have_content(@guillermo_movie_1.rating)
         expect(page).to have_content(@guillermo_movie_1.censored)
         expect(page).to have_content(@guillermo_movie_1.length_in_mins)
-        expect(page).to have_content(@guillermo_movie_2.name)
-        expect(page).to have_content(@corman_movie_1.name)
+        expect(page).not_to have_content(@corman_movie_1.name)
       end
-    end
-  end
-
-  describe 'When I visit the Movie Index page' do
-    it 'has a New Movie button routes to \'/movies/new\' where I  see a form for a new movie record' do
-      visit "/movies"
-
-      click_on "New Movie"
-
-      expect(current_path).to eq("/movies/new")
-      visit "/movies/new"
-      movie_count = Movie.all
-
-      expect(page).to have_content("Name:")
-      fill_in 'movie[director_id]', :with => 'Guillermo del Toro'
-      click_on "Create Movie"
-
-      expect(current_path).to eq("/movies")
-      expect(Movie.all).to eq(movie_count)
     end
   end
 end

@@ -22,49 +22,36 @@ RSpec.describe 'Directors index' do
       end
     end
 
-    describe 'When I visit \'/directors/:id' do
-      it 'shows the director with that id including the director\'s attributes' do
-        visit "/directors/#{@director_guillermo.id}"
-
-        expect(page).to have_content(@director_guillermo.name)
-        expect(page).to have_content(@director_guillermo.age)
-        expect(page).to have_content(@director_guillermo.hometown)
-        expect(page).to have_content(@director_guillermo.alive)
-        expect(page).not_to have_content(@director_corman.name)
-      end
-    end
-
     describe 'When I visit \'/directors' do
       it 'shows records ordered by most recently created first
       And next to each of the records I see when it was created' do
+
+        @director_guillermo.created_at = @director_guillermo.created_at + 10 * 60
+        @director_guillermo.save
+
         visit '/directors'
 
-        expected = @director_guillermo.created_at <= @director_corman.created_at
+        expected = @director_corman.created_at < @director_guillermo.created_at
 
         expect(page).to have_content(@director_guillermo.name)
         expect(page).to have_content(@director_corman.name)
-        expect(expected).to be true
         expect(page).to have_content(@director_guillermo.created_at)
         expect(page).to have_content(@director_corman.created_at)
+        expect(Director.all).to eq([@director_corman, @director_guillermo])
+        expect(expected).to be true
+
+        @director_corman.created_at = @director_corman.created_at + 10 * 600
+        @director_corman.save
+
+        visit '/directors'
+
+        expected = @director_corman.created_at > @director_guillermo.created_at
+
+        expect(Director.all).to eq([@director_guillermo, @director_corman])
+        expect(expected).to be true
       end
     end
-
-    describe 'When I visit any page on the site' do
-      it 'shows a link at the top of the page for both of the director & movie indexes' do
-        visit "/directors/#{@director_guillermo.id}"
-
-        click_on 'Movies List'
-
-        expect(current_path).to eq("/movies")
-
-        visit "/directors/#{@director_guillermo.id}"
-
-        click_on 'Directors List'
-
-        expect(current_path).to eq("/directors")
-      end
-    end
-
+    
     describe 'When I visit a parent show page (/parents/:id)' do
      it 'shows a link to take me to that parent\'s `child_table_name` page' do
         visit "/directors/#{@director_guillermo.id}"
@@ -72,6 +59,24 @@ RSpec.describe 'Directors index' do
         click_on "#{@director_guillermo.name} Movie List"
 
         expect(current_path).to eq("/directors/#{@director_guillermo.id}/movies")
+      end
+    end
+
+    describe 'When I visit the Director Index page' do
+      it 'has a New Director button routes to \'/directors/new\' where I  see a form for a new director record' do
+        visit "/directors"
+
+        click_on "New Director"
+
+        expect(current_path).to eq("/directors/new")
+        visit "/directors/new"
+        director_count = Director.all
+
+        expect(page).to have_content("Name:")
+        click_on "Create Director"
+
+        expect(current_path).to eq("/directors")
+        expect(Director.all).to eq(director_count)
       end
     end
   end

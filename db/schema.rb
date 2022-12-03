@@ -16,23 +16,23 @@ ActiveRecord::Schema.define(version: 3) do
   enable_extension "plpgsql"
 
   create_table "directors", force: :cascade do |t|
-    t.string "hometown"
-    t.boolean "alive"
-    t.integer "age"
-    t.string "name"
+    t.string "hometown", null: false
+    t.boolean "alive", null: false
+    t.integer "age", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "movies", force: :cascade do |t|
-    t.string "version"
-    t.string "rating"
-    t.boolean "censored"
-    t.integer "length_in_mins"
-    t.string "name"
+    t.string "version", null: false
+    t.string "rating", null: false
+    t.boolean "censored", null: false
+    t.integer "length_in_mins", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "director_id"
+    t.bigint "director_id", null: false
     t.index ["director_id"], name: "index_movies_on_director_id"
   end
 

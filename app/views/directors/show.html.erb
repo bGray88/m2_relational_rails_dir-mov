@@ -1,9 +1,9 @@
-<a href="/movies">Movies List</a>
-<a href="/directors">Directors List</a>
+<br><br><h3><%= link_to "Update #{@director.name}", "/directors/#{@director.id}/edit" %></h3><br><br>
 
-<h1>Name:     <%= @director.name %></h1>
-<h1>Age:      <%= @director.age %></h1>
-<h1>Hometown: <%= @director.hometown %></h1>
-<h1>Living:   <%= @director.alive %></h1>
+<h3>Name:     <%= @director.name %></h3><br>
+<h3>Age:      <%= @director.age %></h3><br>
+<h3>Hometown: <%= @director.hometown %></h3><br>
+<h3>Living:   <%= @director.alive %></h3><br>
+<h3>Number of Movies:   <%= @director.movie_count %></h3>
 
-<h1><%= link_to "#{@director.name} Movie List", "/directors/#{@director.id}/movies" %></h1>
+<br><br><h3><%= link_to "#{@director.name} Movie List", "/directors/#{@director.id}/movies" %></h2>

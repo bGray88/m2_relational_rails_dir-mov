@@ -33,30 +33,30 @@ RSpec.describe 'Director\'s movies index' do
   end
 
   describe 'As a visitor' do
-    describe 'When I visit /directors/:id/movies' do
-      it 'shows links to each movies show page' do
-        visit "/directors/#{@director_guillermo.id}/movies"
+    describe 'When I visit \'/directors/:id' do
+      it 'shows the director with that id including the director\'s attributes' do
+        visit "/directors/#{@director_guillermo.id}"
 
-        click_on @guillermo_movie_3.name
-
-        expect(current_path).to eq("/movies/#{@guillermo_movie_3.id}")
+        expect(page).to have_content(@director_guillermo.name)
+        expect(page).to have_content(@director_guillermo.age)
+        expect(page).to have_content(@director_guillermo.hometown)
+        expect(page).to have_content(@director_guillermo.alive)
+        expect(page).not_to have_content(@director_corman.name)
       end
     end
-  end
 
-  describe 'When I visit any page on the site' do
-    it 'shows a link at the top of the page for both of the director & movie indexes' do
-      visit "/directors/#{@director_guillermo.id}/movies"
+    describe 'Then I see a link to update the director "Update Director"' do
+      it 'has a link "Update Director" that goes to \'/directors/:id/edit\' has a form to edit the director\'s attributes' do
+        
+        visit "/directors/#{@director_guillermo.id}/edit"
+        new_age = 100
+        
+        fill_in 'director[age]', :with => new_age
+        click_on "Submit Changes"
 
-      click_on 'Movies List'
-
-      expect(current_path).to eq("/movies")
-
-      visit "/movies"
-
-      click_on 'Directors List'
-
-      expect(current_path).to eq("/directors")
+        expect(current_path).to eq("/directors/#{@director_guillermo.id}")
+        expect(Director.find(@director_guillermo.id).age).to eq(100)
+      end
     end
   end
 end
