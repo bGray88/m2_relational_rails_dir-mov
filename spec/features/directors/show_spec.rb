@@ -58,14 +58,12 @@ RSpec.describe 'Director\'s movies index' do
         # and I am redirected to the Parent's Show page where I see the parent's updated info
         visit "/directors/#{@director_guillermo.id}/edit"
         new_age = 100
-
-        fill_in 'input_id', :with => new_age
-
-        expect(page).to have_content("age: #{new_age}")
+        
+        fill_in 'director[age]', :with => new_age
         click_on "Submit Changes"
 
         expect(current_path).to eq("/directors/#{@director_guillermo.id}")
-        expect(@director_guillermo.age).to eq(100)
+        expect(Director.find(@director_guillermo.id).age).to eq(100)
       end
     end
   end

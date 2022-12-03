@@ -28,7 +28,6 @@ class DirectorsController < ApplicationController
 
   def update
     director = Director.find(params[:id])
-    binding.pry
     director.update({
       hometown:   params[:director][:hometown],
       alive:      params[:director][:alive],
@@ -37,7 +36,7 @@ class DirectorsController < ApplicationController
       updated_at: Time.now
     })
     director.save
-
+    
     redirect_to "/directors/#{director.id}"
   end
 end
