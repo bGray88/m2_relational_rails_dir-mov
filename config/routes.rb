@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get '/directors/new', to: 'directors#new'
   post '/directors', to: 'directors#create'
   get '/directors/:id', to: 'directors#show'
+  get '/directors/:id/edit', to: 'directors#edit'
+  patch '/directors/:id', to: 'directors#update'
 
   get '/directors/:director_id/movies', to: 'director_movies#index'
 

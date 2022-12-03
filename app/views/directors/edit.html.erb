@@ -1,0 +1,14 @@
+<form action="/directors/<%= @director.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH" />
+  <p>Edit <%= "#{@director}" %></p>
+  <label><h3>Name: <input type='text' name='director[name]'/></h3></label>
+  <label><h3>Hometown: <input type='text' name='director[hometown]'/></h3></label>
+  <label><h3>Living: </h3></label>
+  <input type="radio" id="alive_true" name="director[alive]" value=true checked="checked" />
+  <label for="alive_true">true<label>
+  <input type="radio" id="alive_false" name="director[alive]" value=false />
+  <label for="alive_false">false<label>
+  <label><h3>Age: <input type='text' name='director[age]'/></h3></label>
+  <input type='submit' value='Submit Changes'/>
+</form>

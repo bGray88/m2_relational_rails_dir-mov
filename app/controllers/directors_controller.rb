@@ -21,4 +21,23 @@ class DirectorsController < ApplicationController
 
     redirect_to '/directors'
   end
+
+  def edit
+    @director = Director.find(params[:id])
+  end
+
+  def update
+    director = Director.find(params[:id])
+    binding.pry
+    director.update({
+      hometown:   params[:director][:hometown],
+      alive:      params[:director][:alive],
+      age:        params[:director][:age],
+      name:       params[:director][:name],
+      updated_at: Time.now
+    })
+    director.save
+
+    redirect_to "/directors/#{director.id}"
+  end
 end
