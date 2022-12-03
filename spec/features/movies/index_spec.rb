@@ -51,4 +51,22 @@ RSpec.describe 'Movies index' do
       end
     end
   end
+
+  describe 'When I visit the Movie Index page' do
+    it 'has a New Movie button routes to \'/movies/new\' where I  see a form for a new movie record' do
+      visit "/movies"
+
+      click_on "New Movie"
+
+      expect(current_path).to eq("/movies/new")
+      visit "/movies/new"
+      movie_count = Movie.all
+
+      expect(page).to have_content("Name:")
+      click_on "Create Movie"
+
+      expect(current_path).to eq("/movies")
+      expect(Movie.all).to eq(movie_count)
+    end
+  end
 end
