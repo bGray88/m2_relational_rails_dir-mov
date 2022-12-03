@@ -63,6 +63,7 @@ RSpec.describe 'Movies index' do
       movie_count = Movie.all
 
       expect(page).to have_content("Name:")
+      fill_in 'movie[director_id]', :with => 'Guillermo del Toro'
       click_on "Create Movie"
 
       expect(current_path).to eq("/movies")
