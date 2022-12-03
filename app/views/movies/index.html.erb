@@ -1,7 +1,7 @@
 <h1>Movies</h1>
 
 <% @movies.each do |movie| %>
-  <h2>Name:     </h2><h3><%= movie.name %></h3>
+  <h2>Name:     </h2><h3><%= link_to "#{movie.name}", "/movies/#{movie.id}" %></h3>
   <h2>Version:  </h2><h3><%= movie.version %></h3>
   <h2>Rating:   </h2><h3><%= movie.rating %></h3>
   <h2>Censored: </h2><h3><%= movie.censored %></h3>
