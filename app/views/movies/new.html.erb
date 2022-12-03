@@ -1,0 +1,14 @@
+<form action="/movies" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <h2><p>Enter a new movie:</p></h2>
+  <label><h3>
+    Name: <input type='text' name='movie[name]'/><br>
+    Version: <input type='text' name='movie[version]'/><br>
+    Rating: <input type='text' name='movie[rating]'/><br>
+    Censored: <input type="radio" id="censored_true" name="movie[censored]" value=true />
+    <label for="censored_true">true<label>
+    <input type="radio" id="censored_false" name="movie[censored]" value=false checked="checked" />
+    <label for="censored_false">false<label><br>
+    Length in Minutes: <input type='number' min="1" name='movie[length_in_mins]'/></h3></label><br><br>
+  <input type='submit' value='Create Movie'/>
+</form>
