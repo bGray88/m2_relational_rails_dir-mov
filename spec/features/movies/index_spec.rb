@@ -41,13 +41,12 @@ RSpec.describe 'Movies index' do
       it 'shows each movie in the system including the movie\'s attributes' do
         visit '/movies'
 
-        expect(page).to have_content(@guillermo_movie_1.name)
-        expect(page).to have_content(@guillermo_movie_1.version)
-        expect(page).to have_content(@guillermo_movie_1.rating)
-        expect(page).to have_content(@guillermo_movie_1.censored)
-        expect(page).to have_content(@guillermo_movie_1.length_in_mins)
         expect(page).to have_content(@guillermo_movie_2.name)
-        expect(page).to have_content(@corman_movie_1.name)
+        expect(page).to have_content(@guillermo_movie_2.version)
+        expect(page).to have_content(@guillermo_movie_2.rating)
+        expect(page).to have_content(@guillermo_movie_2.censored)
+        expect(page).to have_content(@guillermo_movie_2.length_in_mins)
+        expect(page).to have_content(@guillermo_movie_2.name)
       end
     end
   end
@@ -68,6 +67,15 @@ RSpec.describe 'Movies index' do
 
       expect(current_path).to eq("/movies")
       expect(Movie.all).to eq(movie_count)
+    end
+  end
+
+  describe 'When I visit the child index' do
+    it 'shows only records where the boolean column is `true`' do
+      visit "/movies"
+
+      expect(page).to have_content(@guillermo_movie_2.name)
+      expect(page).to_not have_content(@guillermo_movie_3.name)
     end
   end
 end
