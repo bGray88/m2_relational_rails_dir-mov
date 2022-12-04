@@ -11,6 +11,7 @@
     </h4>
     <h2>
       <%= link_to "Edit", "/directors/#{director.id}/edit" %>
+      <%= link_to "Delete", "/directors/#{director.id}", method: :delete %>
     </h2><br>
   </p>
 <% end %>

@@ -1,4 +1,9 @@
-<br><br><h3><%= link_to "Update #{@movie.name}", "/movies/#{@movie.id}/edit" %></h3><br><br>
+<br><br><h3>
+  <%= link_to "Update #{@movie.name}", "/movies/#{@movie.id}/edit" %>
+<h3>
+<br><h3>
+  <%= link_to "Delete #{@movie.name}", "/movies/#{@movie.id}", method: :delete %>
+</h3><br><br>
 
 <h3>Name:     <%= @movie.name %></h3><br>
 <h3>Version:  <%= @movie.version %></h3><br>

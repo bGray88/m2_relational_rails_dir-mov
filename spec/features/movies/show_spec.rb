@@ -63,5 +63,21 @@ RSpec.describe 'Movies index' do
         expect(Movie.find(@guillermo_movie_1.id).length_in_mins).to eq(5000)
       end
     end
+
+    describe 'Then I see a link to delete the movie "Delete Movie"' do
+      it 'has a link "Delete Movie" that deletes the movie record' do
+        
+        visit "/movies/#{@guillermo_movie_1.id}"
+
+        expect(page).to have_link(text: "Delete")
+
+        expect(Movie.where(id: @guillermo_movie_1.id).first.name).to eq('Cronos')
+
+        page.first(:link, text: "Delete").click
+
+        expect(current_path).to eq("/movies")
+        expect(Movie.where(id: @guillermo_movie_1.id).first).to eq(nil)
+      end
+    end
   end
 end

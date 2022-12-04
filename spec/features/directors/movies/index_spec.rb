@@ -72,4 +72,21 @@ RSpec.describe 'Director\'s movies index' do
       expect(result.path.include?('h3[11]')).to be true
     end
   end
+
+  describe 'When I visit the director\s movies page I see a form to input a number' do
+    describe 'when the submit button is clicked it returns records with more than number of column_name' do
+      it 'then redirects to the director\'s movies index page' do
+        visit "/directors/#{@director_guillermo.id}/movies"
+        expect(page).to have_field("Movies Longer Than", with: '0')
+        above_threshold = 100
+
+        fill_in 'threshold', :with => above_threshold
+        click_on "Submit"
+        result = page.find(:link, text: 'Devil\'s Backbone')
+
+        expect(current_path).to eq("/directors/#{@director_guillermo.id}/movies")
+        expect(result.path.include?('h3[11]')).to be true
+      end
+    end
+  end
 end
