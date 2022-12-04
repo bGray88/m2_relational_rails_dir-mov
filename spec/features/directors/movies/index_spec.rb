@@ -10,22 +10,22 @@ RSpec.describe 'Director\'s movies index' do
                                     alive: true,
                                     age: 96,
                                     name: 'Roger Corman')
-    @guillermo_movie_1 = @director_guillermo.movies.create!(version: 'US Release',
+    @guillermo_movie_1 = @director_guillermo.movies.create!(version: 'Theatrical Release',
+                                      rating: 'R',
+                                      censored: false,
+                                      length_in_mins: 106,
+                                      name: 'Devil\'s Backbone')
+    @guillermo_movie_2 = @director_guillermo.movies.create!(version: 'US Release',
                                         rating: 'R',
                                         censored: false,
                                         length_in_mins: 94,
                                         name: 'Cronos')
-    @guillermo_movie_2 = @director_guillermo.movies.create!(version: 'Original Release',
+    @guillermo_movie_3 = @director_guillermo.movies.create!(version: 'Theatrical Release',
                                         rating: 'R',
                                         censored: true,
                                         length_in_mins: 92,
                                         name: 'Cronos')
-    @guillermo_movie_3 = @director_guillermo.movies.create!(version: 'Original Release',
-                                        rating: 'R',
-                                        censored: false,
-                                        length_in_mins: 106,
-                                        name: 'The Devil\'s Backbone')
-    @corman_movie_1 = @director_corman.movies.create!(version: 'Original Release',
+    @corman_movie_1 = @director_corman.movies.create!(version: 'Theatrical Release',
                                                       rating: 'UR',
                                                       censored: false,
                                                       length_in_mins: 72,
@@ -37,9 +37,9 @@ RSpec.describe 'Director\'s movies index' do
       it 'shows links to each movies show page' do
         visit "/directors/#{@director_guillermo.id}/movies"
 
-        click_on @guillermo_movie_3.name
+        click_on @guillermo_movie_1.name
 
-        expect(current_path).to eq("/movies/#{@guillermo_movie_3.id}")
+        expect(current_path).to eq("/movies/#{@guillermo_movie_1.id}")
       end
     end
   end
@@ -57,6 +57,19 @@ RSpec.describe 'Director\'s movies index' do
       click_on 'Directors List'
 
       expect(current_path).to eq("/directors")
+    end
+  end
+
+  describe 'When I visit the directors page on the site' do
+    it 'shows a link to sort the movies alpabetically when redirected to the director\'s movies index page' do
+      visit "/directors/#{@director_guillermo.id}/movies"
+      expect(page).to have_link("Sort List", text: "Sort List")
+
+      click_on 'Sort List'
+      result = page.find(:link, text: 'Devil\'s Backbone')
+
+      expect(current_path).to eq("/directors/#{@director_guillermo.id}/movies")
+      expect(result.path.include?('h3[11]')).to be true
     end
   end
 end

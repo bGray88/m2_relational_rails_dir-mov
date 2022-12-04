@@ -79,5 +79,22 @@ RSpec.describe 'Directors index' do
         expect(Director.all).to eq(director_count)
       end
     end
+
+    describe 'When I visit the parent index page' do
+      it 'shows a link to edit that parent\'s info' do
+        visit "/directors"
+
+        page.first(:link, text: "Edit").click
+
+        expect(current_path).to eq("/directors/#{@director_guillermo.id}/edit")
+        new_age = 100
+        
+        fill_in 'director[age]', :with => new_age
+        click_on "Submit Changes"
+
+        expect(current_path).to eq("/directors/#{@director_guillermo.id}")
+        expect(Director.find(@director_guillermo.id).age).to eq(100)
+      end
+    end
   end
 end

@@ -41,13 +41,12 @@ RSpec.describe 'Movies index' do
       it 'shows each movie in the system including the movie\'s attributes' do
         visit '/movies'
 
-        expect(page).to have_content(@guillermo_movie_1.name)
-        expect(page).to have_content(@guillermo_movie_1.version)
-        expect(page).to have_content(@guillermo_movie_1.rating)
-        expect(page).to have_content(@guillermo_movie_1.censored)
-        expect(page).to have_content(@guillermo_movie_1.length_in_mins)
         expect(page).to have_content(@guillermo_movie_2.name)
-        expect(page).to have_content(@corman_movie_1.name)
+        expect(page).to have_content(@guillermo_movie_2.version)
+        expect(page).to have_content(@guillermo_movie_2.rating)
+        expect(page).to have_content(@guillermo_movie_2.censored)
+        expect(page).to have_content(@guillermo_movie_2.length_in_mins)
+        expect(page).to have_content(@guillermo_movie_2.name)
       end
     end
   end
@@ -68,6 +67,32 @@ RSpec.describe 'Movies index' do
 
       expect(current_path).to eq("/movies")
       expect(Movie.all).to eq(movie_count)
+    end
+  end
+
+  describe 'When I visit the child index' do
+    it 'shows only records where the boolean column is `true`' do
+      visit "/movies"
+
+      expect(page).to have_content(@guillermo_movie_2.name)
+      expect(page).to_not have_content(@guillermo_movie_3.name)
+    end
+  end
+  
+  describe 'When I visit the movie index page' do
+    it 'shows a link to edit that movie\'s info' do
+      visit "/movies"
+
+      page.first(:link, text: "Edit").click
+
+      expect(current_path).to eq("/movies/#{@guillermo_movie_2.id}/edit")
+      new_length = 5000
+        
+      fill_in 'movie[length_in_mins]', :with => new_length
+      click_on "Submit Changes"
+
+      expect(current_path).to eq("/movies/#{@guillermo_movie_2.id}")
+      expect(Movie.find(@guillermo_movie_2.id).length_in_mins).to eq(5000)
     end
   end
 end
