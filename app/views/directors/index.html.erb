@@ -3,5 +3,14 @@
 <h2><%= link_to "New Director", "/directors/new" %></h2><br>
 
 <% @directors.each do |director| %>
-  <p><h2><%= link_to director.name, "/directors/#{director.id}" %></h2><h4> - Created at: <%= director.created_at %></h4></p>
+  <p><h2>
+      <%= link_to director.name, "/directors/#{director.id}" %>
+    </h2>
+    <h4>
+      - Created at: <%= director.created_at %>
+    </h4>
+    <h2>
+      <%= link_to " Edit", "/directors/#{director.id}/edit" %>
+    </h2><br>
+  </p>
 <% end %>
