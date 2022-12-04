@@ -15,17 +15,17 @@ RSpec.describe 'Director\'s movies index' do
                                         censored: false,
                                         length_in_mins: 94,
                                         name: 'Cronos')
-    @guillermo_movie_2 = @director_guillermo.movies.create!(version: 'Original Release',
+    @guillermo_movie_2 = @director_guillermo.movies.create!(version: 'Theatrical Release',
                                         rating: 'R',
                                         censored: true,
                                         length_in_mins: 92,
                                         name: 'Cronos')
-    @guillermo_movie_3 = @director_guillermo.movies.create!(version: 'Original Release',
+    @guillermo_movie_3 = @director_guillermo.movies.create!(version: 'Theatrical Release',
                                         rating: 'R',
                                         censored: false,
                                         length_in_mins: 106,
                                         name: 'The Devil\'s Backbone')
-    @corman_movie_1 = @director_corman.movies.create!(version: 'Original Release',
+    @corman_movie_1 = @director_corman.movies.create!(version: 'Theatrical Release',
                                                       rating: 'UR',
                                                       censored: false,
                                                       length_in_mins: 72,
@@ -57,6 +57,18 @@ RSpec.describe 'Director\'s movies index' do
       click_on 'Directors List'
 
       expect(current_path).to eq("/directors")
+    end
+  end
+
+  describe 'When I visit the directors page on the site' do
+    it 'shows a link to sort the movies alpabetically when redirected to the director\'s movies index page' do
+      visit "/directors/#{@director_guillermo.id}/movies"
+
+      click_on 'Sort List'
+      result = page.find(:link, text: 'Cronos: Theatrical')
+
+      expect(current_path).to eq("/directors/#{@director_guillermo.id}/movies")
+      expect(result.path.include?('[1]')).to be true
     end
   end
 end
