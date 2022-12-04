@@ -58,5 +58,17 @@ RSpec.describe 'Director\'s movies index' do
         expect(Director.find(@director_guillermo.id).age).to eq(100)
       end
     end
+
+    describe 'Then I see a link to delete the director "Delete Director"' do
+      it 'has a link "Delete Director" that deletes director and all of their movies' do
+        
+        visit "/directors/#{@director_guillermo.id}"
+
+        expect(page).to have_link(text: "Delete")
+
+        expect(current_path).to eq("/directors")
+        expect(Director.find(@director_guillermo.id)).to eq(nil)
+      end
+    end
   end
 end
