@@ -66,9 +66,13 @@ RSpec.describe 'Director\'s movies index' do
 
         expect(page).to have_link(text: "Delete")
 
+        expect(Director.where(id: @director_guillermo.id).first.name).to eq('Guillermo del Toro')
+
+        page.first(:link, text: "Delete").click
+
         expect(current_path).to eq("/directors")
-        expect(Director.find(@director_guillermo.id)).to eq(nil)
-        expect(Movie.find(@guillermo_movie_1.id)).to eq(nil)
+        expect(Director.where(id: @director_guillermo.id).first).to eq(nil)
+        expect(Movie.where(director_id: @director_guillermo.id).first).to eq(nil)
       end
     end
   end
