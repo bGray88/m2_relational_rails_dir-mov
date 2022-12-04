@@ -68,6 +68,7 @@ RSpec.describe 'Director\'s movies index' do
 
         expect(current_path).to eq("/directors")
         expect(Director.find(@director_guillermo.id)).to eq(nil)
+        expect(Movie.find(@guillermo_movie_1.id)).to eq(nil)
       end
     end
   end
