@@ -84,7 +84,7 @@ RSpec.describe 'Directors index' do
       it 'shows a link to edit that parent\'s info' do
         visit "/directors"
 
-        click_on "Edit #{@director_guillermo.name}"
+        page.first(:link, text: "Edit").click
 
         expect(current_path).to eq("/directors/#{@director_guillermo.id}/edit")
         new_age = 100
