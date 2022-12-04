@@ -39,4 +39,12 @@ class DirectorsController < ApplicationController
     
     redirect_to "/directors/#{director.id}"
   end
+
+  def destroy
+    movies = Movie.where(director_id: params[:id])
+    movies.each { |movie| movie.destroy }
+    Director.destroy(params[:id])
+
+    redirect_to "/directors"
+  end
 end

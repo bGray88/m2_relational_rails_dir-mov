@@ -1,4 +1,9 @@
-<br><br><h3><%= link_to "Update #{@director.name}", "/directors/#{@director.id}/edit" %></h3><br><br>
+<br><br><h3>
+  <%= link_to "Update #{@director.name}", "/directors/#{@director.id}/edit" %>
+<h3>
+<br><h3>
+  <%= link_to "Delete #{@director.name}", "/directors/#{@director.id}", method: :delete %>
+</h3><br><br>
 
 <h3>Name:     <%= @director.name %></h3><br>
 <h3>Age:      <%= @director.age %></h3><br>
