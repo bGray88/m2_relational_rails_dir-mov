@@ -63,6 +63,7 @@ RSpec.describe 'Director\'s movies index' do
   describe 'When I visit the directors page on the site' do
     it 'shows a link to sort the movies alpabetically when redirected to the director\'s movies index page' do
       visit "/directors/#{@director_guillermo.id}/movies"
+      expect(page).to have_link('Sort List', href: '/directors/1/movies')
 
       click_on 'Sort List'
       result = page.find(:link, text: 'Cronos: Theatrical')
