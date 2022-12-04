@@ -3,7 +3,10 @@
 <h2><%= link_to "New Movie", "/movies/new" %></h2><br>
 
 <% @movies.each do |movie| %>
-  <br><h3>Name: <%= link_to "#{movie.name}", "/movies/#{movie.id}" %></h3><br>
+  <br><h3>
+    Name: <%= link_to "#{movie.name}", "/movies/#{movie.id}" %>
+    <%= link_to "Edit", "/movies/#{movie.id}/edit"%>
+  </h3><br>
   <h3>Version:  <%= movie.version %></h3><br>
   <h3>Rating:   <%= movie.rating %></h3><br>
   <h3>Censored: <%= movie.censored %></h3><br>

@@ -78,4 +78,21 @@ RSpec.describe 'Movies index' do
       expect(page).to_not have_content(@guillermo_movie_3.name)
     end
   end
+  
+  describe 'When I visit the movie index page' do
+    it 'shows a link to edit that movie\'s info' do
+      visit "/movies"
+
+      page.first(:link, text: "Edit").click
+
+      expect(current_path).to eq("/movies/#{@guillermo_movie_2.id}/edit")
+      new_length = 5000
+        
+      fill_in 'movie[length_in_mins]', :with => new_length
+      click_on "Submit Changes"
+
+      expect(current_path).to eq("/movies/#{@guillermo_movie_2.id}")
+      expect(Movie.find(@guillermo_movie_2.id).length_in_mins).to eq(5000)
+    end
+  end
 end

@@ -69,7 +69,7 @@ RSpec.describe 'Director\'s movies index' do
       result = page.find(:link, text: 'Devil\'s Backbone')
 
       expect(current_path).to eq("/directors/#{@director_guillermo.id}/movies")
-      expect(result.path.include?('[3]')).to be true
+      expect(result.path.include?('h3[11]')).to be true
     end
   end
 end
