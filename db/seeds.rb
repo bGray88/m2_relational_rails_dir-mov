@@ -18,21 +18,21 @@
                                   alive: true,
                                   age: 89,
                                   name: 'Sidney J. Furie')
-@guillermo_movie_1 = @director_guillermo.movies.create!(version: 'US Release',
+@guillermo_movie_1 = @director_guillermo.movies.create!(version: 'Theatrical Release',
+                                    rating: 'R',
+                                    censored: false,
+                                    length_in_mins: 106,
+                                    name: 'Devil\'s Backbone')
+@guillermo_movie_2 = @director_guillermo.movies.create!(version: 'US Release',
                                                         rating: 'R',
                                                         censored: false,
                                                         length_in_mins: 94,
                                                         name: 'Cronos')
-@guillermo_movie_2 = @director_guillermo.movies.create!(version: 'Theatrical Release',
+@guillermo_movie_3 = @director_guillermo.movies.create!(version: 'Theatrical Release',
                                                         rating: 'R',
                                                         censored: true,
                                                         length_in_mins: 92,
                                                         name: 'Cronos')
-@guillermo_movie_3 = @director_guillermo.movies.create!(version: 'Theatrical Release',
-                                                        rating: 'R',
-                                                        censored: false,
-                                                        length_in_mins: 106,
-                                                        name: 'The Devil\'s Backbone')
 @corman_movie_1 = @director_corman.movies.create!(version: 'Theatrical Release',
                                                   rating: 'UR',
                                                   censored: false,

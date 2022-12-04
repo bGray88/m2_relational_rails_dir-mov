@@ -3,3 +3,5 @@
 <br><% @movies.each do |movie| %>
   <h2><%= link_to "#{movie.name}: #{movie.version}", "/movies/#{movie.id}" %></h2><br>
 <% end %>
+
+<br><br><h3><%= link_to "Sort List", "/directors/#{@director.id}/movies?sort=true"%></h2>
