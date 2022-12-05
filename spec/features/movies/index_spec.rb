@@ -59,14 +59,21 @@ RSpec.describe 'Movies index' do
 
       expect(current_path).to eq("/movies/new")
       visit "/movies/new"
-      movie_count = Movie.all
-
       expect(page).to have_content("Name:")
+
+      movie_count = Movie.all.count
+
+      fill_in 'movie[version]', :with => 'Unrated Version'
+      fill_in 'movie[rating]', :with => 'UR'
+      choose 'censored_true'
+      fill_in 'movie[length_in_mins]', :with => '118'
+      fill_in 'movie[name]', :with => 'Pan\'s Labyrinth'
       fill_in 'movie[director_id]', :with => 'Guillermo del Toro'
+
       click_on "Create Movie"
 
       expect(current_path).to eq("/movies")
-      expect(Movie.all).to eq(movie_count)
+      expect(Movie.all.count).to eq(movie_count + 1)
     end
   end
 

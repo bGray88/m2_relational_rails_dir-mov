@@ -14,7 +14,10 @@ class MoviesController < ApplicationController
     parent = Director.find_by(name: movie_params[:director_id])
     parent_id = parent.id unless parent.nil?
     
-    movie = Movie.create(movie_params)
+    new_params = movie_params.except(:director_id)
+    new_params[:director_id] = parent_id
+
+    movie = Movie.create(new_params)
 
     redirect_to '/movies'
   end
@@ -27,8 +30,11 @@ class MoviesController < ApplicationController
     parent = Director.find_by(name: movie_params[:director_id])
     parent_id = parent.id unless parent.nil?
 
+    new_params = movie_params.except(:director_id)
+    new_params[:director_id] = parent_id
+
     movie = Movie.find_by(id: params[:id])
-    movie.update(movie_params.except(:director_id))
+    movie.update(new_params)
 
     redirect_to "/movies/#{movie.id}"
   end

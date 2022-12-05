@@ -70,13 +70,19 @@ RSpec.describe 'Directors index' do
 
         expect(current_path).to eq("/directors/new")
         visit "/directors/new"
-        director_count = Director.all
-
         expect(page).to have_content("Name:")
+        
+        director_count = Director.all.count
+
+        fill_in 'director[hometown]', :with => 'Denver, Colorado'
+        choose 'alive_true'
+        fill_in 'director[age]', :with => 50
+        fill_in 'director[name]', :with => 'Oliver Whiting'
+
         click_on "Create Director"
 
         expect(current_path).to eq("/directors")
-        expect(Director.all).to eq(director_count)
+        expect(Director.all.count).to eq(director_count + 1)
       end
     end
 
