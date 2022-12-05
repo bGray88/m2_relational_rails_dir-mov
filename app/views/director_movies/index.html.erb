@@ -1,6 +1,6 @@
 <h1><%= @director.name %> Movies</h1>
 
-<form action="/movies/<%= "@director.name" %> method="get">
+<form action="/directors/<%= @director.id %>/movies" method="get">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   Movies Longer Than: <input type='number' min="1" name='threshold'/><br>
   <input type='submit' value='Submit Changes'/>
