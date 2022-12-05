@@ -26,7 +26,7 @@ RSpec.describe 'Movies index' do
                                         rating: 'R',
                                         censored: false,
                                         length_in_mins: 106,
-                                        name: 'The Devil\'s Backbone',
+                                        name: 'Devil\'s Backbone',
                                         director: @director_guillermo)
     @corman_movie_1 = Movie.create!(version: 'Original Release',
                                     rating: 'UR',
@@ -52,7 +52,7 @@ RSpec.describe 'Movies index' do
   end
 
   describe 'When I visit the Movie Index page' do
-    it 'has a New Movie button routes to \'/movies/new\' where I  see a form for a new movie record' do
+    it 'has a New Movie button routes to \'/movies/new\' where I see a form for a new movie record' do
       visit "/movies"
 
       click_on "New Movie"
@@ -70,7 +70,7 @@ RSpec.describe 'Movies index' do
     end
   end
 
-  describe 'When I visit the child index' do
+  describe 'When I visit the movie index' do
     it 'shows only records where the boolean column is `true`' do
       visit "/movies"
 
@@ -83,7 +83,8 @@ RSpec.describe 'Movies index' do
     it 'shows a link to edit that movie\'s info' do
       visit "/movies"
 
-      page.first(:link, text: "Edit").click
+      expect(page).to have_link(text: "Cronos")
+      page.find_link(text: "Edit").click
 
       expect(current_path).to eq("/movies/#{@guillermo_movie_2.id}/edit")
       new_length = 5000

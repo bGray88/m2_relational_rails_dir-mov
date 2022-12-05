@@ -63,7 +63,7 @@ RSpec.describe 'Directors index' do
     end
 
     describe 'When I visit the Director Index page' do
-      it 'has a New Director button routes to \'/directors/new\' where I  see a form for a new director record' do
+      it 'has a New Director button routes to \'/directors/new\' where I see a form for a new director record' do
         visit "/directors"
 
         click_on "New Director"
