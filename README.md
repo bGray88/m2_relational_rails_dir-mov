@@ -2,7 +2,6 @@
 
 ## Brandon Gray
 
-Things you may want to cover:
 
 * Ruby 2.7.4
 

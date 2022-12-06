@@ -7,6 +7,8 @@ class Movie < ApplicationRecord
   validates :length_in_mins, presence: true, allow_blank: false
   validates :name, presence: true, allow_blank: false
 
+  default_scope { where(censored: true) }
+
   def self.sort_movies(params)
     Movie.all.order(name: params)
   end
