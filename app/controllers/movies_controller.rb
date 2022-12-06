@@ -27,10 +27,10 @@ class MoviesController < ApplicationController
   end
 
   def update
-    parent = Director.find_by(name: movie_params[:director_id])
+    parent = Director.find_by(name: movie_params[:director])
     parent_id = parent.id unless parent.nil?
 
-    new_params = movie_params.except(:director_id)
+    new_params = movie_params.except(:director)
     new_params[:director_id] = parent_id
 
     movie = Movie.find_by(id: params[:id])
@@ -48,13 +48,13 @@ class MoviesController < ApplicationController
   private
   
   def movie_params
-    params.require(:movie).permit(
+    params.permit(
       :version,
       :rating,
       :censored,
       :length_in_mins,
       :name,
-      :director_id
+      :director
     )
   end
 end

@@ -56,7 +56,7 @@ RSpec.describe 'Movies index' do
         visit "/movies/#{@guillermo_movie_1.id}/edit"
         new_length = 5000
         
-        fill_in 'movie[length_in_mins]', :with => new_length
+        fill_in 'length_in_mins', :with => new_length
         click_on "Submit Changes"
 
         expect(current_path).to eq("/movies/#{@guillermo_movie_1.id}")

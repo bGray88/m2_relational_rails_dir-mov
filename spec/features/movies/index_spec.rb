@@ -63,12 +63,12 @@ RSpec.describe 'Movies index' do
 
       movie_count = Movie.all.count
 
-      fill_in 'movie[version]', :with => 'Unrated Version'
-      fill_in 'movie[rating]', :with => 'UR'
+      fill_in 'version', :with => 'Unrated Version'
+      fill_in 'rating', :with => 'UR'
       choose 'censored_true'
-      fill_in 'movie[length_in_mins]', :with => '118'
-      fill_in 'movie[name]', :with => 'Pan\'s Labyrinth'
-      fill_in 'movie[director_id]', :with => 'Guillermo del Toro'
+      fill_in 'length_in_mins', :with => '118'
+      fill_in 'name', :with => 'Pan\'s Labyrinth'
+      fill_in 'director', :with => 'Guillermo del Toro'
 
       click_on "Create Movie"
 
@@ -96,7 +96,7 @@ RSpec.describe 'Movies index' do
       expect(current_path).to eq("/movies/#{@guillermo_movie_2.id}/edit")
       new_length = 5000
         
-      fill_in 'movie[length_in_mins]', :with => new_length
+      fill_in 'length_in_mins', :with => new_length
       click_on "Submit Changes"
 
       expect(current_path).to eq("/movies/#{@guillermo_movie_2.id}")

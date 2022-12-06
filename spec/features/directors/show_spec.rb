@@ -51,7 +51,7 @@ RSpec.describe 'Director\'s movies index' do
         visit "/directors/#{@director_guillermo.id}/edit"
         new_age = 100
         
-        fill_in 'director[age]', :with => new_age
+        fill_in 'age', :with => new_age
         click_on "Submit Changes"
 
         expect(current_path).to eq("/directors/#{@director_guillermo.id}")

@@ -69,15 +69,14 @@ RSpec.describe 'Directors index' do
         click_on "New Director"
 
         expect(current_path).to eq("/directors/new")
-        visit "/directors/new"
         expect(page).to have_content("Name:")
         
         director_count = Director.all.count
 
-        fill_in 'director[hometown]', :with => 'Denver, Colorado'
+        fill_in 'Hometown', :with => 'Denver, Colorado'
         choose 'alive_true'
-        fill_in 'director[age]', :with => 50
-        fill_in 'director[name]', :with => 'Oliver Whiting'
+        fill_in 'age', :with => 50
+        fill_in 'name', :with => 'Oliver Whiting'
 
         click_on "Create Director"
 
@@ -95,7 +94,7 @@ RSpec.describe 'Directors index' do
         expect(current_path).to eq("/directors/#{@director_guillermo.id}/edit")
         new_age = 100
         
-        fill_in 'director[age]', :with => new_age
+        fill_in 'age', :with => new_age
         click_on "Submit Changes"
 
         expect(current_path).to eq("/directors/#{@director_guillermo.id}")

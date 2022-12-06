@@ -39,7 +39,7 @@ class DirectorsController < ApplicationController
   private
   
   def director_params
-    params.require(:director).permit(
+    params.permit(
       :hometown,
       :alive,
       :age,
