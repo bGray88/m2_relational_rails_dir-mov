@@ -11,13 +11,7 @@ class DirectorsController < ApplicationController
   end
 
   def create
-    director = Director.new({
-      hometown: params[:director][:hometown],
-      alive:    params[:director][:alive],
-      age:      params[:director][:age],
-      name:     params[:director][:name]
-    })
-    director.save
+    director = Director.create(director_params)
 
     redirect_to '/directors'
   end
@@ -28,15 +22,28 @@ class DirectorsController < ApplicationController
 
   def update
     director = Director.find(params[:id])
-    director.update({
-      hometown:   params[:director][:hometown],
-      alive:      params[:director][:alive],
-      age:        params[:director][:age],
-      name:       params[:director][:name],
-      updated_at: Time.now
-    })
-    director.save
+    director.update(director_params)
     
     redirect_to "/directors/#{director.id}"
+  end
+
+  def destroy
+    movies = Director.find(params[:id]).movies.where(director_id: params[:id])
+    movies.each { |movie| movie.destroy }
+
+    Director.destroy(params[:id])
+
+    redirect_to "/directors"
+  end
+
+  private
+  
+  def director_params
+    params.permit(
+      :hometown,
+      :alive,
+      :age,
+      :name
+    )
   end
 end

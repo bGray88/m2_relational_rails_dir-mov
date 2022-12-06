@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   def index
-    @movies = Movie.where(censored: true)
+    @movies = Movie.all
   end
 
   def show
@@ -11,20 +11,15 @@ class MoviesController < ApplicationController
   end
 
   def create
-    parent = Director.find_by(name: params[:movie][:director_id])
+    parent = Director.find_by(name: movie_params[:director])
     parent_id = parent.id unless parent.nil?
     
-    movie = Movie.new({
-      version:        params[:movie][:version],
-      rating:         params[:movie][:rating],
-      censored:       params[:movie][:censored],
-      length_in_mins: params[:movie][:length_in_mins],
-      name:           params[:movie][:name],
-      director_id:    parent_id
-    })
-    movie.save
+    new_params = movie_params.except(:director)
+    new_params[:director_id] = parent_id
 
-    redirect_to '/movies'
+    movie = Movie.create(new_params)
+
+    redirect_to "/directors/#{parent_id}/movies"
   end
 
   def edit
@@ -32,21 +27,34 @@ class MoviesController < ApplicationController
   end
 
   def update
-    parent = Director.find_by(name: params[:movie][:director_id])
+    parent = Director.find_by(name: movie_params[:director])
     parent_id = parent.id unless parent.nil?
 
-    movie = Movie.find(params[:id])
-    movie.update({
-      version:        params[:movie][:version],
-      rating:         params[:movie][:rating],
-      censored:       params[:movie][:censored],
-      length_in_mins: params[:movie][:length_in_mins],
-      name:           params[:movie][:name],
-      director_id:    parent_id,
-      updated_at:     Time.now
-    })
-    movie.save
+    new_params = movie_params.except(:director)
+    new_params[:director_id] = parent_id
+
+    movie = Movie.find_by(id: params[:id])
+    movie.update(new_params)
 
     redirect_to "/movies/#{movie.id}"
+  end
+
+  def destroy
+    Movie.destroy(params[:id])
+
+    redirect_to '/movies'
+  end
+
+  private
+  
+  def movie_params
+    params.permit(
+      :version,
+      :rating,
+      :censored,
+      :length_in_mins,
+      :name,
+      :director
+    )
   end
 end

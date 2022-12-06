@@ -37,30 +37,52 @@ RSpec.describe 'Movies index' do
   end
 
   describe 'As a visitor' do
-    describe 'When I visit \'/movies/:id' do
-      it 'shows the movie with that id including the movie\'s attributes' do
-        visit "/movies/#{@guillermo_movie_1.id}"
+    describe 'User Story #4' do
+      describe 'When I visit \'/movies/:id' do
+        it 'shows the movie with that id including the movie\'s attributes' do
+          visit "/movies/#{@guillermo_movie_1.id}"
 
-        expect(page).to have_content(@guillermo_movie_1.name)
-        expect(page).to have_content(@guillermo_movie_1.version)
-        expect(page).to have_content(@guillermo_movie_1.rating)
-        expect(page).to have_content(@guillermo_movie_1.censored)
-        expect(page).to have_content(@guillermo_movie_1.length_in_mins)
-        expect(page).not_to have_content(@corman_movie_1.name)
+          expect(page).to have_content(@guillermo_movie_1.name)
+          expect(page).to have_content(@guillermo_movie_1.version)
+          expect(page).to have_content(@guillermo_movie_1.rating)
+          expect(page).to have_content(@guillermo_movie_1.censored)
+          expect(page).to have_content(@guillermo_movie_1.length_in_mins)
+          expect(page).not_to have_content(@corman_movie_1.name)
+        end
       end
     end
 
-    describe 'Then I see a link to update the movie "Update Movie"' do
-      it 'has a link "Update Movie" that goes to \'/movies/:id/edit\' has a form to edit the movies\'s attributes' do
-        
-        visit "/movies/#{@guillermo_movie_1.id}/edit"
-        new_length = 5000
-        
-        fill_in 'movie[length_in_mins]', :with => new_length
-        click_on "Submit Changes"
+    describe 'User Story #14' do
+      describe 'Then I see a link to update the movie "Update Movie"' do
+        it 'has a link "Update Movie" that goes to \'/movies/:id/edit\' has a form to edit the movies\'s attributes' do
+          
+          visit "/movies/#{@guillermo_movie_1.id}/edit"
+          new_length = 5000
+          
+          fill_in 'length_in_mins', :with => new_length
+          click_on "Submit Changes"
 
-        expect(current_path).to eq("/movies/#{@guillermo_movie_1.id}")
-        expect(Movie.find(@guillermo_movie_1.id).length_in_mins).to eq(5000)
+          expect(current_path).to eq("/movies/#{@guillermo_movie_1.id}")
+          expect(Movie.find(@guillermo_movie_1.id).length_in_mins).to eq(5000)
+        end
+      end
+    end
+
+    describe 'User Story #20' do
+      describe 'Then I see a link to delete the movie "Delete Movie"' do
+        it 'has a link "Delete Movie" that deletes the movie record' do
+          
+          visit "/movies/#{@guillermo_movie_1.id}"
+
+          expect(page).to have_link(text: "Delete")
+
+          expect(Movie.where(id: @guillermo_movie_1.id).first.name).to eq('Cronos')
+
+          page.first(:link, text: "Delete").click
+
+          expect(current_path).to eq("/movies")
+          expect(Movie.where(id: @guillermo_movie_1.id).first).to eq(nil)
+        end
       end
     end
   end

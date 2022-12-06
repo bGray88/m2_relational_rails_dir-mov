@@ -1,15 +1,10 @@
-<form action="/directors/<%= @director.id %>" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="PATCH" />
-  <h2><p>Edit <%= "#{@director.name}" %></p></h2>
-  <label><h3>
-    Name: <input type='text' name='director[name]' value="<%= @director.name %>"/><br>
-    Hometown: <input type='text' name='director[hometown]' value="<%= @director.hometown %>"/><br>
-    Living: <input type="radio" id="alive_true" name="director[alive]" value=true checked="checked" />
-    <label for="alive_true">true<label>
-    <input type="radio" id="alive_false" name="director[alive]" value=false />
-    <label for="alive_false">false<label><br>
-    Age: <input type='text' name='director[age]' value="<%= @director.age %>"/>
-  </h3></label><br><br>
-  <input type='submit' value='Submit Changes'/>
-</form>
+<%= form_with url:"/directors/#{@director.id}", method: :patch, local: true do |f| %>
+  <%= f.label "Edit #{@director.name}" %><br>
+  <%= f.label :name, "Name: " %><%= f.text_field :name, value: @director.name %><br>
+  <%= f.label :hometown, "Hometown: " %><%= f.text_field :hometown, value: @director.hometown %><br>
+  <%= f.label :alive, "Living: " %>
+  <%= f.radio_button :alive, "true" %><%= f.label :alive_true, "true" %>
+  <%= f.radio_button :alive, "false" %><%= f.label :alive_false, "false" %><br>
+  <%= f.label :age, "Age: " %><%= f.number_field :age, value: @director.age %><br>
+  <%= f.submit 'Submit Changes' %>
+<% end %>

@@ -1,14 +1,15 @@
-<h1>Movies</h1>
+<h1><%= label :title, "Movies" %></h1>
 
 <h2><%= link_to "New Movie", "/movies/new" %></h2><br>
 
 <% @movies.each do |movie| %>
   <br><h3>
-    Name: <%= link_to "#{movie.name}", "/movies/#{movie.id}" %>
+    <%= label :text, :name, "Name: " %><%= link_to "#{movie.name} #{movie.version}", "/movies/#{movie.id}" %>
     <%= link_to "Edit", "/movies/#{movie.id}/edit"%>
+    <%= link_to "Delete", "/movies/#{movie.id}", method: :delete %>
   </h3><br>
-  <h3>Version:  <%= movie.version %></h3><br>
-  <h3>Rating:   <%= movie.rating %></h3><br>
-  <h3>Censored: <%= movie.censored %></h3><br>
-  <h3>Length:   <%= movie.length_in_mins %> minutes</h3><br>
+  <h3><%= label :text, :version, "Version: #{movie.version}" %></h3><br>
+  <h3><%= label :text, :rating, "Rating: #{movie.rating}" %></h3><br>
+  <h3><%= label :text, :censored, "Censored: #{movie.censored}" %></h3><br>
+  <h3><%= label :text, :length_in_mins, "Length #{movie.length_in_mins} minutes" %></h3><br>
 <% end %>
