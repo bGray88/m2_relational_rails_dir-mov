@@ -1,17 +1,14 @@
-<h1>Directors</h1>
+<h1><%= label :title, "Directors" %></h1>
 
 <h2><%= link_to "New Director", "/directors/new" %></h2><br>
 
 <% @directors.each do |director| %>
-  <p><h2>
-      <%= link_to director.name, "/directors/#{director.id}" %>
-    </h2>
-    <h4>
-      - Created at: <%= director.created_at %>
-    </h4>
-    <h2>
+  <p><h2><%= link_to director.name, "/directors/#{director.id}" %>
+    </h2><h4>
+      <%= label :text, :created, " - Created at: #{director.created_at}" %>
+    </h4><h3>
       <%= link_to "Edit", "/directors/#{director.id}/edit" %>
       <%= link_to "Delete", "/directors/#{director.id}", method: :delete %>
-    </h2><br>
+    </h3><br>
   </p>
 <% end %>

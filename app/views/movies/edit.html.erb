@@ -3,6 +3,7 @@
   <%= f.label :name, "Name: " %><%= f.text_field :name, value: @movie.name %><br>
   <%= f.label :version, "Version: " %><%= f.text_field :version, value: @movie.version %><br>
   <%= f.label :rating, "Rating: " %><%= f.text_field :rating, value: @movie.rating %><br> 
+  <%= f.label :censored, "Censored: " %>
   <%= f.radio_button :censored, "true" %><%= f.label :censored_true, "true" %>
   <%= f.radio_button :censored, "false" %><%= f.label :censored_false, "false" %><br>
   <%= f.label :length_in_mins, "Length: " %><%= f.number_field :length_in_mins, value: @movie.length_in_mins %><br>

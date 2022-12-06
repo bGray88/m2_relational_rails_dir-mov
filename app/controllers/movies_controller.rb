@@ -11,10 +11,10 @@ class MoviesController < ApplicationController
   end
 
   def create
-    parent = Director.find_by(name: movie_params[:director_id])
+    parent = Director.find_by(name: movie_params[:director])
     parent_id = parent.id unless parent.nil?
     
-    new_params = movie_params.except(:director_id)
+    new_params = movie_params.except(:director)
     new_params[:director_id] = parent_id
 
     movie = Movie.create(new_params)

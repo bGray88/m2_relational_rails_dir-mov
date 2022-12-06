@@ -1,14 +1,10 @@
-<br><br><h3>
-  <%= link_to "Update #{@director.name}", "/directors/#{@director.id}/edit" %>
-<h3>
-<br><h3>
-  <%= link_to "Delete #{@director.name}", "/directors/#{@director.id}", method: :delete %>
-</h3><br><br>
+<br><br><%= link_to "Update #{@director.name}", "/directors/#{@director.id}/edit" %><br>
+<%= link_to "Delete #{@director.name}", "/directors/#{@director.id}", method: :delete %><br><br>
 
-<h3>Name:     <%= @director.name %></h3><br>
-<h3>Age:      <%= @director.age %></h3><br>
-<h3>Hometown: <%= @director.hometown %></h3><br>
-<h3>Living:   <%= @director.alive %></h3><br>
-<h3>Number of Movies:   <%= @director.movie_count %></h3>
+<%= label :text, :name, "Name: #{@director.name}" %><br>
+<%= label :text, :age, "Age: #{@director.age}" %><br>
+<%= label :text, :hometown, "Hometown: #{@director.hometown}" %><br>
+<%= label :text, :alive, "Living: #{@director.alive}" %><br>
+<%= label :text, :movie_count, "Number of Movies: #{@director.movie_count}" %><br><br>
 
-<br><br><h3><%= link_to "#{@director.name} Movie List", "/directors/#{@director.id}/movies" %></h2>
+<%= link_to "#{@director.name} Movie List", "/directors/#{@director.id}/movies" %>

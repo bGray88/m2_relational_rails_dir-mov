@@ -2,6 +2,7 @@
   <%= f.label "Edit #{@director.name}" %><br>
   <%= f.label :name, "Name: " %><%= f.text_field :name, value: @director.name %><br>
   <%= f.label :hometown, "Hometown: " %><%= f.text_field :hometown, value: @director.hometown %><br>
+  <%= f.label :alive, "Living: " %>
   <%= f.radio_button :alive, "true" %><%= f.label :alive_true, "true" %>
   <%= f.radio_button :alive, "false" %><%= f.label :alive_false, "false" %><br>
   <%= f.label :age, "Age: " %><%= f.number_field :age, value: @director.age %><br>
