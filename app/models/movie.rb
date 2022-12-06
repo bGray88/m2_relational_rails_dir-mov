@@ -6,4 +6,12 @@ class Movie < ApplicationRecord
   validates :censored, inclusion: { in: [ true, false ] }
   validates :length_in_mins, presence: true, allow_blank: false
   validates :name, presence: true, allow_blank: false
+
+  def self.sort_movies(params)
+    Movie.all.order(name: params)
+  end
+
+  def self.limit_by_length(params)
+    Movie.all.where(length_in_mins: (params.to_i + 1)..Float::INFINITY)
+  end
 end
