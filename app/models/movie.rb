@@ -8,14 +8,14 @@ class Movie < ApplicationRecord
   validates :name, presence: true, allow_blank: false
 
   def self.limit_by(params)
-    Movie.all.where(params)
+    self.all.where(params)
   end
 
   def self.sort_movies(params)
-    Movie.all.order(name: params)
+    self.all.order(name: params)
   end
 
   def self.limit_by_length(params)
-    Movie.all.where(length_in_mins: (params.to_i + 1)..Float::INFINITY)
+    self.all.where(length_in_mins: (params.to_i + 1)..Float::INFINITY)
   end
 end
