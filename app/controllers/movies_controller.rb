@@ -19,7 +19,7 @@ class MoviesController < ApplicationController
 
     movie = Movie.create(new_params)
 
-    redirect_to '/movies'
+    redirect_to "/directors/#{parent_id}/movies"
   end
 
   def edit

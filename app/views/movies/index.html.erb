@@ -4,7 +4,7 @@
 
 <% @movies.each do |movie| %>
   <br><h3>
-    <%= label :text, :name, "Name: " %><%= link_to "#{movie.name}", "/movies/#{movie.id}" %>
+    <%= label :text, :name, "Name: " %><%= link_to "#{movie.name} #{movie.version}", "/movies/#{movie.id}" %>
     <%= link_to "Edit", "/movies/#{movie.id}/edit"%>
     <%= link_to "Delete", "/movies/#{movie.id}", method: :delete %>
   </h3><br>
